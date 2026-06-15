@@ -1,1 +1,11 @@
-# Semana 09 - Reimplementação da Calculadora em Python## O que foi feitoNesta semana, peguei a lógica da calculadora interativa que tinha feito antes por blocos no OctoStudio e refiz ela totalmente em Python textual para rodar no terminal. ## Como o programa funcionaCriei um menu interativo dentro de um laço `while True` para o programa não fechar sozinho. O usuário escolhe a operação (somar, subtrair, multiplicar, dividir ou sair) e digita os números.## O que aprendi de novo- **Menus interativos:** Como usar o `while` para manter o programa rodando até o usuário decidir sair.- **Tratamento de erros:** Coloquei uma checagem simples com `if/else` para impedir que o programa tente dividir por zero e quebre no meio da execução.## Print do terminal rodando a calculadora![Calculadora com Menu](print.png)
+# Semana 09 - Reimplementação da Calculadora em Python
+
+## O que foi feito
+Nesta semana, peguei a lógica da calculadora interativa que tinha feito antes por blocos no OctoStudio e refiz ela totalmente em Python textual para rodar no terminal. 
+
+## Como o programa funciona
+Criei um menu interativo dentro de um laço `while True` para o programa não fechar sozinho. O usuário escolhe a operação (somar, subtrair, multiplicar, dividir ou sair) e digita os números.
+
+## O que aprendi de novo
+- **Menus interativos:** Como usar o `while` para manter o programa rodando até o usuário decidir sair.
+- **Tratamento de erros:** Coloquei uma checagem simples com `if/else` para impedir que o programa tente dividir por zero e quebre no meio da execução.
