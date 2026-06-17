@@ -1,0 +1,1 @@
+# Semana 12 - Agregados Heterogêneos (Dicionários) e Ordenação## O que foi feitoCriação de um sistema de agenda de contatos integrado aos códigos de Regiões Administrativas do PDAD 2024.## Conceitos Computacionais- Uso de dicionários para estruturar registros de dados.- Implementação manual do algoritmo de ordenação Bubble Sort para strings.
