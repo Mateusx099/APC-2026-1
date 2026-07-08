@@ -94,8 +94,10 @@ def atualizar_interface(event=None):
     lbl_pessoas.config(text=f"Média de Pessoas por Domicílio: {m_pessoas:.1f} pessoas")
     lbl_criancas.config(text=f"Total de Crianças: {int(t_criancas)} | Arranjo Comum: {a_topo}")
     
-    fig.clear()
-    ax = fig.add_subplot(111)
+    fig_m.clear()
+    fig_f.clear()
+    ax_m = fig_m.add_subplot(111)
+    ax_f = fig_f.add_subplot(111)
     
     if 'id_genero_calc' in df_ra.columns and df_ra['id_genero_calc'].notna().any():
         m_mask = df_ra['id_genero_calc'] == 1.0
@@ -107,26 +109,26 @@ def atualizar_interface(event=None):
         m_ages = df_ra[m_mask]['idade_calculada'].dropna()
         f_ages = df_ra[f_mask]['idade_calculada'].dropna()
         
-        if not m_ages.empty and not f_ages.empty:
-            ax.hist([m_ages, f_ages], bins=15, color=["#2b5c8f", "#d95f02"], edgecolor='black', label=['Masc', 'Fem'])
-            ax.legend(fontsize=8)
-        elif not m_ages.empty:
-            ax.hist(m_ages, bins=15, color="#2b5c8f", edgecolor='black', label='Masc')
-            ax.legend(fontsize=8)
-        elif not f_ages.empty:
-            ax.hist(f_ages, bins=15, color="#d95f02", edgecolor='black', label='Fem')
-            ax.legend(fontsize=8)
+        ax_m.hist(m_ages, bins=15, color="#2b5c8f", edgecolor='black')
+        ax_f.hist(f_ages, bins=15, color="#d95f02", edgecolor='black')
     else:
-        ax.hist(df_ra['idade_calculada'].dropna(), bins=15, color="#6c3483", edgecolor='black', label='População')
-        ax.legend(fontsize=8)
+        ax_m.hist(df_ra['idade_calculada'].dropna(), bins=15, color="#6c3483", edgecolor='black')
+        ax_f.hist(df_ra['idade_calculada'].dropna(), bins=15, color="#6c3483", edgecolor='black')
         
-    ax.set_title(f"Composição Etária — {ra_sel}", fontsize=10, fontweight='bold')
-    ax.set_xlabel("Idade (Anos)", fontsize=8)
-    ax.set_ylabel("Quantidade de Moradores", fontsize=8)
-    ax.grid(axis='y', linestyle='--', alpha=0.5)
+    ax_m.set_title(f"Composição Etária Masculina — {ra_sel}", fontsize=10, fontweight='bold')
+    ax_m.set_xlabel("Idade (Anos)", fontsize=8)
+    ax_m.set_ylabel("Quantidade de Moradores", fontsize=8)
+    ax_m.grid(axis='y', linestyle='--', alpha=0.5)
     
-    fig.tight_layout()
-    canvas.draw()
+    ax_f.set_title(f"Composição Etária Feminina — {ra_sel}", fontsize=10, fontweight='bold')
+    ax_f.set_xlabel("Idade (Anos)", fontsize=8)
+    ax_f.set_ylabel("Quantidade de Moradores", fontsize=8)
+    ax_f.grid(axis='y', linestyle='--', alpha=0.5)
+    
+    fig_m.tight_layout()
+    fig_f.tight_layout()
+    canvas_m.draw()
+    canvas_f.draw()
 
 def exportar_relatorio():
     ra_sel = combo_ra.get()
@@ -152,7 +154,7 @@ def exportar_relatorio():
 
 janela = tk.Tk()
 janela.title("PDAD 2024")
-janela.geometry("600x580")
+janela.geometry("600x620")
 janela.resizable(False, False)
 
 tk.Label(janela, text="Análise Demográfica PDAD 2024", font=("Arial", 12,)).pack(pady=5)
@@ -181,9 +183,22 @@ lbl_pessoas.pack(anchor="w")
 lbl_criancas = tk.Label(frame_stats, text="Total de crianças na localidade:", font=("Arial", 9, "bold"))
 lbl_criancas.pack(anchor="w")
 
-fig = plt.Figure(figsize=(5, 2.5), dpi=100)
-canvas = FigureCanvasTkAgg(fig, master=janela)
-canvas.get_tk_widget().pack(pady=5, fill="both", expand=True, padx=15)
+notebook = ttk.Notebook(janela)
+notebook.pack(pady=5, fill="both", expand=True, padx=15)
+
+aba_homens = ttk.Frame(notebook)
+notebook.add(aba_homens, text="Masculino")
+
+aba_mulheres = ttk.Frame(notebook)
+notebook.add(aba_mulheres, text="Feminino")
+
+fig_m = plt.Figure(figsize=(5, 2.5), dpi=100)
+canvas_m = FigureCanvasTkAgg(fig_m, master=aba_homens)
+canvas_m.get_tk_widget().pack(pady=5, fill="both", expand=True)
+
+fig_f = plt.Figure(figsize=(5, 2.5), dpi=100)
+canvas_f = FigureCanvasTkAgg(fig_f, master=aba_mulheres)
+canvas_f.get_tk_widget().pack(pady=5, fill="both", expand=True)
 
 tk.Button(janela, text="Exportar Dados (.txt)", command=exportar_relatorio).pack(pady=5)
 tk.Label(janela, text="Mateus de Lima — 232021937 — Projeto Final APC", fg="black", font=("Arial", 8)).pack(side="bottom", pady=5)
