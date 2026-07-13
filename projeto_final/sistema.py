@@ -1,3 +1,7 @@
+#Trabalho Final APC
+#NOME: MATEUS DE LIMA - 232021937
+#Recorte F - Perfil demográfico e composição familiar
+
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from pathlib import Path
