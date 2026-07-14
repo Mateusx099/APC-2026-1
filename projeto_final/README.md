@@ -26,6 +26,8 @@ Para o programa rodar, os seguintes arquivos devem estar na mesma pasta do scrip
 - domicilios.xlsx
 - dicionario_de_variaveis_pdada_2024_público.xlsx
 
+LINK DE DOWNLOAD: https://pdad.ipe.df.gov.br/
+
 ## Como Executar
 Abra o terminal na pasta do projeto e execute:
 python sistema.py
