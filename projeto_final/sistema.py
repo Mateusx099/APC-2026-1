@@ -336,7 +336,16 @@ def carregar_bases():
 
     lista_ras = sorted(df_completo["ra_nome"].unique())
     combo_ra["values"] = lista_ras
-    lbl_status.config(text="Dados carregados com sucesso.")
+
+    total_moradores = len(df_completo)
+    total_domicilios = df_completo["A01nficha"].nunique()
+
+    lbl_status.config(
+        text=(
+            f"Sucesso! {total_moradores} moradores e "
+            f"{total_domicilios} domicílios carregados."
+        )
+    )
 
     if lista_ras:
         combo_ra.set(lista_ras[0])
@@ -359,6 +368,12 @@ def construir_janela():
         text="Perfil demográfico e composição domiciliar",
         font=("Arial", 14, "bold")
     ).pack(pady=(10, 2))
+
+    ttk.Label(
+        janela,
+        text="Mateus de Lima - 232021937 - APC",
+        font=("Arial", 10, "italic")
+    ).pack()
 
     ttk.Label(
         janela,
